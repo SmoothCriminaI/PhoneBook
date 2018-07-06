@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,10 +132,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(i==BirthName.size()-1)
                     ss+="的生日!";
             }
-            if(Fes.equals(""))
-                Toast.makeText(MainActivity.this,ss,Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(MainActivity.this,ss+"\n"+"今天是"+Fes,Toast.LENGTH_LONG).show();
+            if(!Fes.equals("")&&!ss.equals(""))
+                DisplayToast(ss+"\n"+"今天是"+Fes);
+            else if(!ss.equals(""))
+                DisplayToast(ss);
+            else if(!Fes.equals(""))
+                DisplayToast("今天是"+Fes);
             editor.putString("Now_Mon",NowMon);
             editor.putString("Now_Day",NowDay);
             editor.apply();
@@ -233,6 +236,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-
+    public void DisplayToast(String s) {
+        Toast toast=Toast.makeText(this,s,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP,0,1020);
+        toast.show();
+    }
 
 }
